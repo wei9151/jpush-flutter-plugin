@@ -550,6 +550,8 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         [_channel invokeMethod:@"onOpenNotification" arguments: [self jpushFormatAPNSDic:userInfo]];
+    } else if([response.notification.request.trigger isKindOfClass:[UNTimeIntervalNotificationTrigger class]]) {
+        [_channel invokeMethod:@"onOpenNotification" arguments: [self jpushFormatAPNSDic:userInfo]];
     }
     completionHandler();
 }
