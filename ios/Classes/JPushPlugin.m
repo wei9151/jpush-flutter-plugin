@@ -135,6 +135,8 @@ static NSMutableArray<FlutterResult>* getRidResults;
         [self setAlias:call result:result];
     } else if([@"deleteAlias" isEqualToString:call.method]) {
         [self deleteAlias:call result:result];
+    } else if([@"getBadge" isEqualToString:call.method]) {
+        [self getBadge:call result:result];
     } else if([@"setBadge" isEqualToString:call.method]) {
         [self setBadge:call result:result];
     } else if([@"stopPush" isEqualToString:call.method]) {
@@ -301,6 +303,10 @@ static NSMutableArray<FlutterResult>* getRidResults;
     } seq: 0];
 }
 
+- (void)getBadge:(FlutterMethodCall*)call result:(FlutterResult)result {
+    result(@(UIApplication.sharedApplication.applicationIconBadgeNumber));
+}
+
 - (void)setBadge:(FlutterMethodCall*)call result:(FlutterResult)result {
     JPLog(@"setBadge:%@",call.arguments);
     NSInteger badge = [call.arguments[@"badge"] integerValue];
@@ -455,7 +461,7 @@ static NSMutableArray<FlutterResult>* getRidResults;
             result(dict);
         });
     }];
-   
+    
     
 }
 - (void)openSettingsForNotification {
