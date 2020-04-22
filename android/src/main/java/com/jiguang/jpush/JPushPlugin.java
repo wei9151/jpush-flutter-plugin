@@ -108,8 +108,6 @@ public class JPushPlugin implements MethodCallHandler {
             sendLocalNotification(call, result);
         } else if (call.method.equals("setBadge")) {
             setBadge(call, result);
-        }else if (call.method.equals("getBadge")) {
-            getBadge(call, result);
         } else if (call.method.equals("isNotificationEnabled")) {
             isNotificationEnabled(call, result);
         } else if (call.method.equals("openSettingsForNotification")) {
@@ -320,17 +318,6 @@ public class JPushPlugin implements MethodCallHandler {
             JPushInterface.setBadgeNumber(registrar.context(),num);
             result.success(true);
         }
-    }
-
-    public void getBadge(MethodCall call, Result result) {
-        HashMap<String, Object> map = call.arguments();
-        Object numObject = map.get("badge");
-        if (numObject != null) {
-            int num = (int)numObject;
-            JPushInterface.setBadgeNumber(registrar.context(),num);
-            JPushInterface.
-        }
-        result.success(0);
     }
 
     /// 检查当前应用的通知开关是否开启
