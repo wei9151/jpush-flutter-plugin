@@ -338,7 +338,7 @@ class LocalNotification {
   final Map<String, String> extra; //?
   final DateTime fireTime;
   final int badge; //?
-  final String soundName; //?
+  final String sound; //?
   final String subtitle; //?
 
   const LocalNotification(
@@ -349,7 +349,7 @@ class LocalNotification {
         this.buildId,
         this.extra,
         this.badge = 0,
-        this.soundName,
+        this.sound,
         this.subtitle})
       : assert(id != null),
         assert(title != null),
@@ -365,7 +365,7 @@ class LocalNotification {
       'buildId': buildId,
       'extra': extra,
       'badge': badge,
-      'soundName': soundName,
+      'sound': sound,
       'subtitle': subtitle
     }..removeWhere((key, value) => value == null);
   }
