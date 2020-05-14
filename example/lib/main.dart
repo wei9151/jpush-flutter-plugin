@@ -114,7 +114,8 @@ class _MyAppState extends State<MyApp> {
                           fireTime: fireDate,
                           subtitle: 'fasf',
                           badge: 5,
-                          extra: {"fa": "0"});
+                          sound: "ring1",
+                          extra: {"fa": "0", "sound": "ring1"});
                       jpush
                           .sendLocalNotification(localNotification)
                           .then((res) {
