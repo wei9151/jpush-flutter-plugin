@@ -18,7 +18,7 @@ class JPush {
         _platform = platform;
 
   static final JPush _instance =
-  new JPush.private(const MethodChannel('jpush'), const LocalPlatform());
+      new JPush.private(const MethodChannel('jpush'), const LocalPlatform());
 
   EventHandler _onReceiveNotification;
   EventHandler _onOpenNotification;
@@ -70,7 +70,8 @@ class JPush {
       case "onReceiveMessage":
         return _onReceiveMessage(call.arguments.cast<String, dynamic>());
       case "onReceiveNotificationAuthorization":
-        return _onReceiveNotificationAuthorization(call.arguments.cast<String, dynamic>());
+        return _onReceiveNotificationAuthorization(
+            call.arguments.cast<String, dynamic>());
       default:
         throw new UnsupportedError("Unrecognized Event");
     }
@@ -102,7 +103,7 @@ class JPush {
     print(flutter_log + "setTags:");
 
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('setTags', tags);
+        await _channel.invokeMethod('setTags', tags);
     return result;
   }
 
@@ -116,7 +117,7 @@ class JPush {
     print(flutter_log + "cleanTags:");
 
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('cleanTags');
+        await _channel.invokeMethod('cleanTags');
     return result;
   }
 
@@ -132,7 +133,7 @@ class JPush {
     print(flutter_log + "addTags:");
 
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('addTags', tags);
+        await _channel.invokeMethod('addTags', tags);
     return result;
   }
 
@@ -147,7 +148,7 @@ class JPush {
     print(flutter_log + "deleteTags:");
 
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('deleteTags', tags);
+        await _channel.invokeMethod('deleteTags', tags);
     return result;
   }
 
@@ -161,7 +162,7 @@ class JPush {
     print(flutter_log + "getAllTags:");
 
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('getAllTags');
+        await _channel.invokeMethod('getAllTags');
     return result;
   }
 
@@ -177,7 +178,7 @@ class JPush {
     print(flutter_log + "setAlias:");
 
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('setAlias', alias);
+        await _channel.invokeMethod('setAlias', alias);
     return result;
   }
 
@@ -191,7 +192,7 @@ class JPush {
     print(flutter_log + "deleteAlias:");
 
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('deleteAlias');
+        await _channel.invokeMethod('deleteAlias');
     return result;
   }
 
@@ -245,7 +246,7 @@ class JPush {
   ///
   void clearNotification({@required int notificationId}) {
     print(flutter_log + "clearNotification:");
-    _channel.invokeListMethod("clearNotification",notificationId);
+    _channel.invokeListMethod("clearNotification", notificationId);
   }
 
   ///
@@ -259,7 +260,7 @@ class JPush {
     print(flutter_log + "getLaunchAppNotification:");
 
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('getLaunchAppNotification');
+        await _channel.invokeMethod('getLaunchAppNotification');
     return result;
   }
 
@@ -287,19 +288,18 @@ class JPush {
     return notification.toMap().toString();
   }
 
-
   /// 调用此 API 检测通知授权状态是否打开
   Future<bool> isNotificationEnabled() async {
-    final Map<dynamic, dynamic> result = await _channel.invokeMethod('isNotificationEnabled');
+    final Map<dynamic, dynamic> result =
+        await _channel.invokeMethod('isNotificationEnabled');
     bool isEnabled = result["isEnabled"];
     return isEnabled;
   }
 
   /// 调用此 API 跳转至系统设置中应用设置界面
-  void openSettingsForNotification()  {
+  void openSettingsForNotification() {
     _channel.invokeMethod('openSettingsForNotification');
   }
-
 }
 
 class NotificationSettingsIOS {
@@ -343,14 +343,14 @@ class LocalNotification {
 
   const LocalNotification(
       {@required this.id,
-        @required this.title,
-        @required this.content,
-        @required this.fireTime,
-        this.buildId,
-        this.extra,
-        this.badge = 0,
-        this.sound,
-        this.subtitle})
+      @required this.title,
+      @required this.content,
+      @required this.fireTime,
+      this.buildId,
+      this.extra,
+      this.badge = 0,
+      this.sound,
+      this.subtitle})
       : assert(id != null),
         assert(title != null),
         assert(content != null),

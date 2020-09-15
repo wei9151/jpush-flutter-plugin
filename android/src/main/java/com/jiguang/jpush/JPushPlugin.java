@@ -3,9 +3,11 @@ package com.jiguang.jpush;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -310,12 +312,26 @@ public class JPushPlugin implements MethodCallHandler {
 
     public void setBadge(MethodCall call, Result result) {
         Log.d(TAG,"setBadge: " + call.arguments);
-
         HashMap<String, Object> map = call.arguments();
         Object numObject = map.get("badge");
         if (numObject != null) {
             int num = (int)numObject;
-            JPushInterface.setBadgeNumber(registrar.context(),num);
+            Log.d("BRAND", Build.BRAND);
+            switch (Build.BRAND.toLowerCase()) {
+                case "huawei":
+                case "honor":
+                case "samsung":
+                case "oppo":
+                case "vivo":
+                case "lenovo":
+                case "htc":
+                case "sony":
+                    BadgeUtils.setCount(num, registrar.context());
+                    break;
+                default:
+                    JPushInterface.setBadgeNumber(registrar.context(),num);
+                    break;
+            }
             result.success(true);
         }
     }
