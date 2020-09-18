@@ -316,22 +316,7 @@ public class JPushPlugin implements MethodCallHandler {
         Object numObject = map.get("badge");
         if (numObject != null) {
             int num = (int)numObject;
-            Log.d("BRAND", Build.BRAND);
-            switch (Build.BRAND.toLowerCase()) {
-                case "huawei":
-                case "honor":
-                case "samsung":
-                case "oppo":
-                case "vivo":
-                case "lenovo":
-                case "htc":
-                case "sony":
-                    BadgeUtils.setCount(num, registrar.context());
-                    break;
-                default:
-                    JPushInterface.setBadgeNumber(registrar.context(),num);
-                    break;
-            }
+            JPushInterface.setBadgeNumber(registrar.context(),num);
             result.success(true);
         }
     }
