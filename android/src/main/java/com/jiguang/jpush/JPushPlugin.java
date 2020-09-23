@@ -3,11 +3,9 @@ package com.jiguang.jpush;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -290,8 +288,8 @@ public class JPushPlugin implements MethodCallHandler {
             HashMap<String, Object> map = call.arguments();
 
             JPushLocalNotification ln = new JPushLocalNotification();
-            ln.setBuilderId(((Number) map.get("buildId")).intValue());
-            ln.setNotificationId(((Number) map.get("id")).intValue());
+            ln.setBuilderId((Integer)map.get("buildId"));
+            ln.setNotificationId((Integer)map.get("id"));
             ln.setTitle((String) map.get("title"));
             ln.setContent((String) map.get("content"));
             HashMap<String, Object> extra = (HashMap<String, Object>)map.get("extra");
@@ -312,6 +310,7 @@ public class JPushPlugin implements MethodCallHandler {
 
     public void setBadge(MethodCall call, Result result) {
         Log.d(TAG,"setBadge: " + call.arguments);
+
         HashMap<String, Object> map = call.arguments();
         Object numObject = map.get("badge");
         if (numObject != null) {

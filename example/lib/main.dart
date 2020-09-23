@@ -14,6 +14,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String debugLable = 'Unknown';
   final JPush jpush = new JPush();
+
   @override
   void initState() {
     super.initState();
@@ -92,7 +93,7 @@ class _MyAppState extends State<MyApp> {
           Container(
             margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
             color: Colors.brown,
-            child: Text(debugLable),
+            child: Text(debugLable ?? "Unknown"),
             width: 350,
             height: 100,
           ),
@@ -114,8 +115,7 @@ class _MyAppState extends State<MyApp> {
                           fireTime: fireDate,
                           subtitle: 'fasf',
                           badge: 5,
-                          sound: "ring1",
-                          extra: {"fa": "0", "sound": "ring1"});
+                          extra: {"fa": "0"});
                       jpush
                           .sendLocalNotification(localNotification)
                           .then((res) {
