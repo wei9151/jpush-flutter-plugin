@@ -288,8 +288,8 @@ public class JPushPlugin implements MethodCallHandler {
             HashMap<String, Object> map = call.arguments();
 
             JPushLocalNotification ln = new JPushLocalNotification();
-            ln.setBuilderId((Integer)map.get("buildId"));
-            ln.setNotificationId((Integer)map.get("id"));
+            ln.setBuilderId((Long)map.get("buildId"));
+            ln.setNotificationId((Long)map.get("id"));
             ln.setTitle((String) map.get("title"));
             ln.setContent((String) map.get("content"));
             HashMap<String, Object> extra = (HashMap<String, Object>)map.get("extra");
