@@ -70,8 +70,7 @@ class JPush {
       case "onReceiveMessage":
         return _onReceiveMessage(call.arguments.cast<String, dynamic>());
       case "onReceiveNotificationAuthorization":
-        return _onReceiveNotificationAuthorization(
-            call.arguments.cast<String, dynamic>());
+        return _onReceiveNotificationAuthorization(call.arguments.cast<String, dynamic>());
       default:
         throw new UnsupportedError("Unrecognized Event");
     }
@@ -246,7 +245,7 @@ class JPush {
   ///
   void clearNotification({@required int notificationId}) {
     print(flutter_log + "clearNotification:");
-    _channel.invokeListMethod("clearNotification", notificationId);
+    _channel.invokeListMethod("clearNotification",notificationId);
   }
 
   ///
@@ -288,18 +287,19 @@ class JPush {
     return notification.toMap().toString();
   }
 
+
   /// 调用此 API 检测通知授权状态是否打开
   Future<bool> isNotificationEnabled() async {
-    final Map<dynamic, dynamic> result =
-        await _channel.invokeMethod('isNotificationEnabled');
+    final Map<dynamic, dynamic> result = await _channel.invokeMethod('isNotificationEnabled');
     bool isEnabled = result["isEnabled"];
     return isEnabled;
   }
 
   /// 调用此 API 跳转至系统设置中应用设置界面
-  void openSettingsForNotification() {
+  void openSettingsForNotification()  {
     _channel.invokeMethod('openSettingsForNotification');
   }
+
 }
 
 class NotificationSettingsIOS {
