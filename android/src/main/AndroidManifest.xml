@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.jiguang.jpush">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.jiguang.jpush">
     <application>
         <receiver
             android:name="com.jiguang.jpush.JPushPlugin$JPushReceiver"
@@ -33,6 +34,12 @@
                 <action android:name="cn.jiguang.user.service.action" />
             </intent-filter>
         </service>
+
+        <provider
+            android:authorities="${applicationId}.DownloadProvider"
+            android:name="cn.jpush.android.service.DownloadProvider"
+            tools:replace="android:exported"
+            android:exported="false"/>
     </application>
     <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
 </manifest>
