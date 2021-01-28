@@ -1,3 +1,7 @@
+## 0.6.3
++ 修复：Android端获取RegistrationID偶现奔溃问题
+## 0.6.2
++ 同步更最新版本SDK
 ## 0.6.1
 + 修复：Android 端 context为空时的crash问题
 ## 0.6.0
