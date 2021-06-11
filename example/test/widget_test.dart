@@ -4,6 +4,15 @@
 // find child widgets in the widget tree, read text, and verify that the values of widget properties
 // are correct.
 
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+import 'package:jpush_example/main.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
+
+import 'package:test/test.dart';
+
 void main() {
   /*
   testWidgets('Verify Platform version', (WidgetTester tester) async {
@@ -41,4 +50,5 @@ test('requestNotificationPermissions on ios with custom permissions', () {
   });
 
   */
+
 }
