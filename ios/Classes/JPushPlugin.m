@@ -414,6 +414,10 @@ static NSMutableArray<FlutterResult>* getRidResults;
         content.sound = params[@"sound"];
     }
     
+    if (params[@"soundName"] && ![params[@"soundName"] isEqualToString:@"<null>"]) {
+        content.sound = params[@"soundName"];
+    }
+    
     JPushNotificationTrigger *trigger = [[JPushNotificationTrigger alloc] init];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
         if (params[@"fireTime"]) {
