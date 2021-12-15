@@ -1,3 +1,15 @@
+## 2.1.9
++ 升级：新增onNotifyMessageUnShow方法
+## 2.1.8
++ 升级： jpush 4.4.5
+## 2.1.7
++ 升级： jcore 3.1.0
+## 2.1.6
++ 升级：升级 android push 4.4.0 jcore 3.0.0
+## 2.1.5
++ 升级：升级 android push 4.2.8 jcore 2.9.0，ios push 3.7.0，jcore 2.7.1。
+## 2.1.4
++ 新增：Android push 新增 setWakeEnable 接口
 ## 2.1.2
 + 升级：升级 android push 4.0.8 jcore 2.8.2，ios push 3.6.1，jcore 2.6.2。
 ## 2.0.9

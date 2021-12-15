@@ -25,7 +25,7 @@ class JPush {
   EventHandler? _onOpenNotification;
   EventHandler? _onReceiveMessage;
   EventHandler? _onReceiveNotificationAuthorization;
-
+  EventHandler? _onNotifyMessageUnShow;
   void setup({
     String appKey = '',
     bool production = false,
@@ -42,6 +42,18 @@ class JPush {
     });
   }
 
+  //APP活跃在前台时是否展示通知
+  void setUnShowAtTheForeground({
+    bool unShow = false,
+  }) {
+    print(flutter_log + "setUnShowAtTheForeground:");
+    _channel.invokeMethod('setUnShowAtTheForeground', {'UnShow': unShow});
+  }
+
+  void setWakeEnable({bool enable = false}) {
+    _channel.invokeMethod('setWakeEnable', {'enable': enable});
+  }
+
   ///
   /// 初始化 JPush 必须先初始化才能执行其他操作(比如接收事件传递)
   ///
@@ -50,6 +62,7 @@ class JPush {
     EventHandler? onOpenNotification,
     EventHandler? onReceiveMessage,
     EventHandler? onReceiveNotificationAuthorization,
+    EventHandler? onNotifyMessageUnShow,
   }) {
     print(flutter_log + "addEventHandler:");
 
@@ -57,6 +70,7 @@ class JPush {
     _onOpenNotification = onOpenNotification;
     _onReceiveMessage = onReceiveMessage;
     _onReceiveNotificationAuthorization = onReceiveNotificationAuthorization;
+    _onNotifyMessageUnShow = onNotifyMessageUnShow;
     _channel.setMethodCallHandler(_handleMethod);
   }
 
@@ -73,6 +87,8 @@ class JPush {
       case "onReceiveNotificationAuthorization":
         return _onReceiveNotificationAuthorization!(
             call.arguments.cast<String, dynamic>());
+      case "onNotifyMessageUnShow":
+        return _onNotifyMessageUnShow!(call.arguments.cast<String, dynamic>());
       default:
         throw new UnsupportedError("Unrecognized Event");
     }

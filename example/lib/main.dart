@@ -48,13 +48,19 @@ class _MyAppState extends State<MyApp> {
         setState(() {
           debugLable = "flutter onReceiveNotificationAuthorization: $message";
         });
+      },onNotifyMessageUnShow:
+          (Map<String, dynamic> message) async {
+        print("flutter onNotifyMessageUnShow: $message");
+        setState(() {
+          debugLable = "flutter onNotifyMessageUnShow: $message";
+        });
       });
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
 
     jpush.setup(
-      appKey: "e58a32cb3e4469ebf31867e5", //你自己应用的 AppKey
+      appKey: "xxxxx", //你自己应用的 AppKey
       channel: "theChannel",
       production: false,
       debug: true,
