@@ -141,7 +141,7 @@ static NSMutableArray<FlutterResult>* getRidResults;
         [self setAlias:call result:result];
     } else if([@"deleteAlias" isEqualToString:call.method]) {
         [self deleteAlias:call result:result];
-    } else if([@"getBadge" isEqualToString:call.method]) {
+    }else if([@"getBadge" isEqualToString:call.method]) {
         [self getBadge:call result:result];
     } else if([@"setBadge" isEqualToString:call.method]) {
         [self setBadge:call result:result];
@@ -305,6 +305,10 @@ static NSMutableArray<FlutterResult>* getRidResults;
     } seq: 0];
 }
 
+- (void)getBadge:(FlutterMethodCall*)call result:(FlutterResult)result {
+    result(@(UIApplication.sharedApplication.applicationIconBadgeNumber));
+}
+
 - (void)deleteAlias:(FlutterMethodCall*)call result:(FlutterResult)result {
     JPLog(@"deleteAlias:%@",call.arguments);
     [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
@@ -315,10 +319,6 @@ static NSMutableArray<FlutterResult>* getRidResults;
             result([error flutterError]);
         }
     } seq: 0];
-}
-
-- (void)getBadge:(FlutterMethodCall*)call result:(FlutterResult)result {
-    result(@(UIApplication.sharedApplication.applicationIconBadgeNumber));
 }
 
 - (void)setBadge:(FlutterMethodCall*)call result:(FlutterResult)result {
@@ -584,7 +584,9 @@ static NSMutableArray<FlutterResult>* getRidResults;
     JPLog(@"application:didReceiveRemoteNotification:fetchCompletionHandler");
     
     [JPUSHService handleRemoteNotification:userInfo];
-    [_channel invokeMethod:@"onReceiveNotification" arguments:userInfo];
+    if (@available(* ,iOS 10)) {
+        [_channel invokeMethod:@"onReceiveNotification" arguments:userInfo];
+    }
     completionHandler(UIBackgroundFetchResultNewData);
     return YES;
 }
@@ -619,7 +621,9 @@ static NSMutableArray<FlutterResult>* getRidResults;
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
-        [_channel invokeMethod:@"onReceiveNotification" arguments: [self jpushFormatAPNSDic:userInfo]];
+        if (@available(iOS 10 , *)) {
+            [_channel invokeMethod:@"onReceiveNotification" arguments: [self jpushFormatAPNSDic:userInfo]];
+        }
     }else{
         JPLog(@"iOS10 前台收到本地通知:userInfo：%@",userInfo);
     }
