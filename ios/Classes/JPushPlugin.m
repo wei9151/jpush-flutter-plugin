@@ -370,7 +370,8 @@ static NSMutableArray<FlutterResult>* getRidResults;
 
 - (void)getLaunchAppNotification:(FlutterMethodCall*)call result:(FlutterResult)result {
     JPLog(@"getLaunchAppNotification");
-    result(_launchNotification == nil ? @{}: _launchNotification);
+    result(_launchNotification == nil ? @{}: _launchNotification.copy);
+    _launchNotification = nil;
 }
 
 - (void)getRegistrationID:(FlutterMethodCall*)call result:(FlutterResult)result {
