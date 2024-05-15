@@ -365,7 +365,7 @@ public class JPushPlugin implements FlutterPlugin, MethodCallHandler {
             HashMap<String, Object> map = call.arguments();
             int id = ((Number) map.get("buildId")).intValue();
 
-            MultiActionsNotificationBuilder builder = new MultiActionsNotificationBuilder(PushSetActivity.this);
+            MultiActionsNotificationBuilder builder = new MultiActionsNotificationBuilder(context);
             //添加按钮，参数（按钮图片、按钮文字、扩展数据）
             builder.addJPushAction(R.drawable.jpush_ic_richpush_actionbar_back, "first", "my_extra1");
             builder.addJPushAction(R.drawable.jpush_ic_action_close, "second", "my_extra2");
