@@ -26,6 +26,7 @@ class JPush {
   EventHandler? _onReceiveMessage;
   EventHandler? _onReceiveNotificationAuthorization;
   EventHandler? _onNotifyMessageUnShow;
+
   void setup({
     String appKey = '',
     bool production = false,
@@ -182,6 +183,7 @@ class JPush {
         await _channel.invokeMethod('getAllTags');
     return result;
   }
+
   ///
   /// 获取所有当前绑定的 alias
   ///
@@ -191,9 +193,10 @@ class JPush {
   Future<Map<dynamic, dynamic>> getAlias() async {
     print(flutter_log + "getAlias:");
     final Map<dynamic, dynamic> result =
-    await _channel.invokeMethod('getAlias');
+        await _channel.invokeMethod('getAlias');
     return result;
   }
+
   ///
   /// 重置 alias.
   ///
@@ -314,6 +317,13 @@ class JPush {
     await _channel.invokeMethod('sendLocalNotification', notification.toMap());
 
     return notification.toMap().toString();
+  }
+
+  Future<void> setCustomNotification(Map<String, dynamic> map) async {
+    print(flutter_log + "setCustomNotification: start");
+
+    await _channel.invokeMethod('setCustomNotification', map);
+    print(flutter_log + "setCustomNotification: end");
   }
 
   /// 调用此 API 检测通知授权状态是否打开
