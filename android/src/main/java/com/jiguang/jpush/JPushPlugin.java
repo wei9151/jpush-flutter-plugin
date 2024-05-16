@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.jiguang.api.JCoreInterface;
+import cn.jpush.android.api.CustomPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.MultiActionsNotificationBuilder;
 import cn.jpush.android.api.NotificationMessage;
@@ -360,18 +361,32 @@ public class JPushPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     public void setCustomNotification(MethodCall call, Result result) {
-        Log.d(TAG, "setCustomNotification arguments: " + call.arguments);
+        Log.d(TAG, "setCustomNotification ---- arguments: " + call.arguments);
         try {
             HashMap<String, Object> map = call.arguments();
             int id = ((Number) map.get("buildId")).intValue();
 
-            MultiActionsNotificationBuilder builder = new MultiActionsNotificationBuilder(context);
-            //添加按钮，参数（按钮图片、按钮文字、扩展数据）
-            builder.addJPushAction(R.drawable.jpush_ic_richpush_actionbar_back, "first", "my_extra1");
-            builder.addJPushAction(R.drawable.jpush_ic_action_close, "second", "my_extra2");
-            builder.addJPushAction(R.drawable.jpush_ic_richpush_actionbar_back, "third", "my_extra3");
-            JPushInterface.setPushNotificationBuilder(id, builder);
-            Log.d(TAG, "setCustomNotification end id: " + id);
+//            MultiActionsNotificationBuilder builder = new MultiActionsNotificationBuilder(context);
+//            //添加按钮，参数（按钮图片、按钮文字、扩展数据）
+//            builder.addJPushAction(R.drawable.jpush_ic_richpush_actionbar_back, "first", "my_extra1");
+//            builder.addJPushAction(R.drawable.jpush_ic_action_close, "second", "my_extra2");
+//            builder.addJPushAction(R.drawable.jpush_ic_richpush_actionbar_back, "third", "my_extra3");
+//            JPushInterface.setPushNotificationBuilder(id, builder);
+
+            CustomPushNotificationBuilder builder = new
+                    CustomPushNotificationBuilder(context,
+                    R.layout.custom_notitfication1,
+                    R.id.cn_icon,
+                    R.id.cn_title,
+                    R.id.cn_text,
+                    R.id.cn_time);
+//            builder.statusBarDrawable = R.drawable.your_notification_icon;
+//            // 指定最顶层状态栏小图标
+//            builder.layoutIconDrawable = R.drawable.your_2_notification_icon;
+//            // 指定下拉状态栏时显示的通知图标
+//
+            JPushInterface.setPushNotificationBuilder(3, builder);
+            Log.d(TAG, "setCustomNotification ---- end");
         } catch (Exception e) {
             e.printStackTrace();
         }
